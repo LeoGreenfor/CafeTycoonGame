@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1862921670019608441}
   - component: {fileID: 2267894173641153390}
   - component: {fileID: 8823916684986351593}
+  - component: {fileID: 4821074598958369502}
   m_Layer: 0
   m_Name: Table 1
   m_TagString: Untagged
@@ -90,6 +91,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4821074598958369502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2794229211969872977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb8ecbd23da35b241ab3a6c8eecb211e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  price: 0
+  maxNumberSittingPlaces: 5
+  sittingPlaces:
+  - {fileID: 6110983387617112531}
+  - {fileID: 4661660460241689721}
+  - {fileID: 6687633636064028187}
+  - {fileID: 4699354348873862706}
+  - {fileID: 11474378147457861}
+  _currentNumberSittingPlaces: 0
 --- !u!1001 &468986311644971845
 PrefabInstance:
   m_ObjectHideFlags: 0
