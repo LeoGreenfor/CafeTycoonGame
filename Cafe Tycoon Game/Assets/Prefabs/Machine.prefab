@@ -161,9 +161,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c01eca57a648614e95562c684a8e32b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsAvaliable: 0
   price: 0
-  timeDelay: 0
+  timeDelay: 10
+  robots: []
   maxQueueSize: 2
+  _currentQueueSize: 0
   queuePlaces:
   - {fileID: 8491735421618435852}
   - {fileID: 3489460928039553844}

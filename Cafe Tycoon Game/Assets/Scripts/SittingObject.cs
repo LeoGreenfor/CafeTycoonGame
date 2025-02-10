@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,19 +10,46 @@ public class SittingObject : InteractibleObject
     [SerializeField]
     private Transform[] sittingPlaces;
     [SerializeField]
-    private int _currentNumberSittingPlaces;
+    public int _currentNumberSittingPlaces = 0;
+    public bool IsQueueFree => _currentNumberSittingPlaces < maxNumberSittingPlaces;
 
+    private RobotBuyerController _previousFirstRobot;
 
-    public bool GetSittingCapability()
+    private void Start()
     {
-        return _currentNumberSittingPlaces < maxNumberSittingPlaces;
+        robots = new RobotBuyerController[maxNumberSittingPlaces];
     }
+
     public Transform GetFreeQueuePlace()
     {
-        return sittingPlaces[_currentNumberSittingPlaces];
+        int index = Array.IndexOf(robots, null);
+        return sittingPlaces[index];
     }
     public void UpdCurrentQueueSize(int index)
     {
         _currentNumberSittingPlaces += index;
+    }
+
+    public IEnumerator ServeClient(RobotBuyerController client)
+    {
+        yield return new WaitUntil(() => client.IsAtTable);
+        yield return new WaitForSeconds(timeDelay);
+        RemovePersonFromQueue(client);
+        client.IsCompleteSitting = true;
+    }
+
+    public void AddPersonToQueue(RobotBuyerController robot)
+    {
+        int index = Array.IndexOf(robots, null);
+        robots[index] = robot;
+        UpdCurrentQueueSize(1);
+
+        StartCoroutine(ServeClient(robot));
+    }
+    private void RemovePersonFromQueue(RobotBuyerController robot)
+    {
+        int index = Array.IndexOf(robots, robot);
+        robots[index] = null;
+        UpdCurrentQueueSize(-1);
     }
 }

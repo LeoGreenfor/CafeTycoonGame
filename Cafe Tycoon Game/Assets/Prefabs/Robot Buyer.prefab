@@ -26,7 +26,7 @@ PrefabInstance:
     - target: {fileID: 4601045932098685639, guid: 4a458e7cddc185c45803690a325da45d,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.86602545
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4601045932098685639, guid: 4a458e7cddc185c45803690a325da45d,
         type: 3}
@@ -36,7 +36,7 @@ PrefabInstance:
     - target: {fileID: 4601045932098685639, guid: 4a458e7cddc185c45803690a325da45d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4601045932098685639, guid: 4a458e7cddc185c45803690a325da45d,
         type: 3}
@@ -103,8 +103,8 @@ NavMeshAgent:
   m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 380
-  m_StoppingDistance: 0
+  m_AngularSpeed: 10
+  m_StoppingDistance: 0.2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -174,3 +174,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f9691e1a572b7147bddfcff901dc6a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isBoughtItem: 0
+  IsAtTable: 0

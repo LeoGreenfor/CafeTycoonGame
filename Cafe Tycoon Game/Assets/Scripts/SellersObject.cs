@@ -1,33 +1,74 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SellersObject : InteractibleObject
 {
     [SerializeField]
     private int maxQueueSize;
-    private int _currentQueueSize;
+    public int _currentQueueSize = 0;
     [SerializeField]
     private Transform[] queuePlaces;
     [SerializeField]
     private ParticleSystem moneyParticleSystem;
+    public bool IsQueueFree => _currentQueueSize < maxQueueSize;
 
-    public bool GetQueueCapability()
+    private RobotBuyerController _previousFirstRobot;
+
+    private void Start()
     {
-        return _currentQueueSize < maxQueueSize; 
+        robots = new RobotBuyerController[maxQueueSize];
     }
+
     public Transform GetFreeQueuePlace()
     {
-        return queuePlaces[_currentQueueSize];
+        int index = Array.IndexOf(robots, null);
+        return queuePlaces[index];
     }
     public void UpdCurrentQueueSize(int index)
     {
         _currentQueueSize += index;
     }
 
-    /*public void AddPersonToQueue(GameObject gameObject)
+    public IEnumerator ServeClient(RobotBuyerController client)
     {
-        _currentQueueSize++;
-        gameObject.transform = queuePlaces[_currentQueueSize];
-    }*/
+        yield return new WaitForSeconds(timeDelay);
+        client.IsBoughtItem = true;
+        RemoveFirstPersonFromQueue();
+    }
+
+    public void AddPersonToQueue(RobotBuyerController robot)
+    {
+        robots[_currentQueueSize] = robot;
+        UpdCurrentQueueSize(1);
+
+        CheckFirstElementChange();
+    }
+    private void RemoveFirstPersonFromQueue()
+    {
+        for (int i = 1; i < robots.Length; i++)
+        {
+            robots[i - 1] = robots[i];
+
+            if (robots[i - 1] != null) // Prevent null reference
+                robots[i - 1].UpdQueuePlace(queuePlaces[i - 1]);
+        }
+
+        robots[_currentQueueSize - 1] = null; // Set last element to null
+        UpdCurrentQueueSize(-1);
+
+        CheckFirstElementChange();
+    }
+    private void CheckFirstElementChange()
+    {
+        if (_currentQueueSize > 0 && robots[0] != _previousFirstRobot)
+        {
+            _previousFirstRobot = robots[0];
+
+            if (robots[0] != null) // Ensure it's not null before calling ServeClient
+                StartCoroutine(ServeClient(robots[0]));
+        }
+    }
 }

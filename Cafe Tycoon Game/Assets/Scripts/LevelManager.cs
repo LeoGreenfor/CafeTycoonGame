@@ -23,17 +23,42 @@ public class LevelManager : MonoBehaviour
     }
     public void SpawnBuyer()
     {
-        //var spawnPosition = sellerObjects[0].GetFreeQueuePlace();
-        var robot = Instantiate(robotBuyerPrefab, robotSpawnPoint.position, Quaternion.identity, null);
-        robot.GetComponent<RobotBuyerController>()
-            .SetPath(sellerObjects[0].GetFreeQueuePlace(), sittingObjects[0].GetFreeQueuePlace());
-        sellerObjects[0].UpdCurrentQueueSize(1);
-        sittingObjects[0].UpdCurrentQueueSize(1);
+        Transform machineQueue = null, tableQueue = null;
+        SellersObject machine = null;
+        SittingObject table = null;
+
+        foreach (var seller in sellerObjects)
+        {
+            if (seller.IsQueueFree)// && seller.IsAvaliable)
+            {
+                machineQueue = seller.GetFreeQueuePlace();
+                machine = seller;
+                break;
+            }
+        }
+        foreach (var place in sittingObjects)
+        {
+            if (place.IsQueueFree)// && place.IsAvaliable)
+            {
+                tableQueue = place.GetFreeQueuePlace();
+                table = place;
+                break;
+            }
+        }
+
+        if (machine != null && table != null)
+        {
+            var robot = Instantiate(robotBuyerPrefab, robotSpawnPoint.position, Quaternion.identity, null);
+
+            robot.GetComponent<RobotBuyerController>().SetPath(machineQueue, tableQueue);
+            machine.AddPersonToQueue(robot.GetComponent<RobotBuyerController>());
+            table.AddPersonToQueue(robot.GetComponent<RobotBuyerController>());
+        }
     }
     private IEnumerator Timer()
     {
-        yield return new WaitForSeconds(spawnTimer);
         SpawnBuyer();
+        yield return new WaitForSeconds(spawnTimer);
 
         StartCoroutine(Timer());
     }
