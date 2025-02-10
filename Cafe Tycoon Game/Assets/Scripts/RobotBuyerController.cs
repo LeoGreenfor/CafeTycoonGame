@@ -58,16 +58,12 @@ public class RobotBuyerController : MonoBehaviour
                 if (Vector3.Distance(agent.transform.position, _tablePlace.position) <= 0.2f)
                 {
                     IsAtTable = true;
-                    Debug.Log("✅ Робот прибув до столу!");
                 }
-
-                Debug.Log("✅ Агент досяг пункту призначення.");
             }
         }
         else
         {
             agent.isStopped = false;
-            //Debug.Log("🔄 Агент рухається...");
         }
     }
 
@@ -75,16 +71,13 @@ public class RobotBuyerController : MonoBehaviour
     {
         if (agent.pathPending)
         {
-            Debug.Log("⏳ Шлях ще обчислюється...");
             return false;
         }
 
-        float distanceThreshold = 0.1f; // Малий запас
+        float distanceThreshold = 0.1f; 
         bool hasStoppedMoving = agent.velocity.sqrMagnitude < 0.01f;
 
         bool hasArrived = agent.remainingDistance <= agent.stoppingDistance + distanceThreshold && hasStoppedMoving;
-
-        //Debug.Log($"📏 Відстань до мети: {agent.remainingDistance}, Зупинений: {hasStoppedMoving}");
 
         return hasArrived;
     }
@@ -109,7 +102,6 @@ public class RobotBuyerController : MonoBehaviour
 
     private void GoToTheTable()
     {
-        //yield return new WaitForEndOfFrame();
         MoveTo(_tablePlace.position);
     }
     private void LeaveTable()

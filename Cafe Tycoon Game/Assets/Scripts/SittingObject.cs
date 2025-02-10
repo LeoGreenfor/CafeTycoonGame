@@ -9,8 +9,7 @@ public class SittingObject : InteractibleObject
     private int maxNumberSittingPlaces;
     [SerializeField]
     private Transform[] sittingPlaces;
-    [SerializeField]
-    public int _currentNumberSittingPlaces = 0;
+    private int _currentNumberSittingPlaces = 0;
     public bool IsQueueFree => _currentNumberSittingPlaces < maxNumberSittingPlaces;
 
     private RobotBuyerController _previousFirstRobot;

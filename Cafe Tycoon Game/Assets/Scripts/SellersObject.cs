@@ -7,8 +7,10 @@ using UnityEngine;
 public class SellersObject : InteractibleObject
 {
     [SerializeField]
+    private int level;
+    [SerializeField]
     private int maxQueueSize;
-    public int _currentQueueSize = 0;
+    private int _currentQueueSize = 0;
     [SerializeField]
     private Transform[] queuePlaces;
     [SerializeField]
@@ -22,6 +24,7 @@ public class SellersObject : InteractibleObject
         robots = new RobotBuyerController[maxQueueSize];
     }
 
+    #region Client Handle
     public Transform GetFreeQueuePlace()
     {
         int index = Array.IndexOf(robots, null);
@@ -70,5 +73,11 @@ public class SellersObject : InteractibleObject
             if (robots[0] != null) // Ensure it's not null before calling ServeClient
                 StartCoroutine(ServeClient(robots[0]));
         }
+    }
+    #endregion
+
+    protected override void ActionOnClick()
+    {
+        UIManager.Instance.SetAndShowMachinePopUp(description, level);
     }
 }
