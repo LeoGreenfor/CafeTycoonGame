@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class SellersObject : InteractibleObject
+public class MachineObject : InteractibleObject
 {
     [SerializeField]
     private int level;
@@ -16,18 +17,21 @@ public class SellersObject : InteractibleObject
     [SerializeField]
     private ParticleSystem moneyParticleSystem;
     public bool IsQueueFree => _currentQueueSize < maxQueueSize;
+    public bool IsQueueFullLevelUp => maxQueueSize == queuePlaces.Length;
 
     private RobotBuyerController _previousFirstRobot;
+    private float _currentPrice;
 
     private void Start()
     {
-        robots = new RobotBuyerController[maxQueueSize];
+        robots = new List<RobotBuyerController>(new RobotBuyerController[maxQueueSize]);
+        _currentPrice = basePrice;
     }
 
     #region Client Handle
     public Transform GetFreeQueuePlace()
     {
-        int index = Array.IndexOf(robots, null);
+        int index = robots.IndexOf(null);
         return queuePlaces[index];
     }
     public void UpdCurrentQueueSize(int index)
@@ -51,15 +55,15 @@ public class SellersObject : InteractibleObject
     }
     private void RemoveFirstPersonFromQueue()
     {
-        for (int i = 1; i < robots.Length; i++)
+        for (int i = 1; i < robots.Count; i++)
         {
             robots[i - 1] = robots[i];
 
-            if (robots[i - 1] != null) // Prevent null reference
+            if (robots[i - 1] != null)
                 robots[i - 1].UpdQueuePlace(queuePlaces[i - 1]);
         }
 
-        robots[_currentQueueSize - 1] = null; // Set last element to null
+        robots[_currentQueueSize - 1] = null;
         UpdCurrentQueueSize(-1);
 
         CheckFirstElementChange();
@@ -70,7 +74,7 @@ public class SellersObject : InteractibleObject
         {
             _previousFirstRobot = robots[0];
 
-            if (robots[0] != null) // Ensure it's not null before calling ServeClient
+            if (robots[0] != null)
                 StartCoroutine(ServeClient(robots[0]));
         }
     }
@@ -78,6 +82,21 @@ public class SellersObject : InteractibleObject
 
     protected override void ActionOnClick()
     {
-        UIManager.Instance.SetAndShowMachinePopUp(description, level);
+        UIManager.Instance.SetAndShowMachinePopUp(description, level, this);
+    }
+
+    public void UpdMaxQueueSize()
+    {
+        queuePlaces[maxQueueSize].gameObject.SetActive(true);
+        maxQueueSize++;
+        robots.Add(null);
+    }
+    public void UpdPricePerItem()
+    {
+        _currentPrice++;
+    }
+    public float GetCurrentPrice()
+    {
+        return _currentPrice;
     }
 }

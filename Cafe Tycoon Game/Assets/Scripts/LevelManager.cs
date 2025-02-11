@@ -6,9 +6,9 @@ public class LevelManager : MonoBehaviour
 {
     public int Level;
     [SerializeField]
-    private SellersObject[] sellerObjects;
+    private MachineObject[] sellerObjects;
     [SerializeField]
-    private SittingObject[] sittingObjects;
+    private TableObject[] sittingObjects;
 
     [SerializeField]
     private GameObject robotBuyerPrefab;
@@ -24,8 +24,8 @@ public class LevelManager : MonoBehaviour
     public void SpawnBuyer()
     {
         Transform machineQueue = null, tableQueue = null;
-        SellersObject machine = null;
-        SittingObject table = null;
+        MachineObject machine = null;
+        TableObject table = null;
 
         foreach (var seller in sellerObjects)
         {

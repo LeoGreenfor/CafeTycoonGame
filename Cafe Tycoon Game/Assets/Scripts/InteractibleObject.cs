@@ -11,7 +11,7 @@ public class InteractibleObject : MonoBehaviour
     [SerializeField]
     protected float timeDelay;
     [SerializeField]
-    protected RobotBuyerController[] robots;
+    protected List<RobotBuyerController> robots;
     [SerializeField]
     protected DescriptionBase description;
 

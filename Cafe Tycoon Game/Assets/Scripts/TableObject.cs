@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SittingObject : InteractibleObject
+public class TableObject : InteractibleObject
 {
     [SerializeField]
     private int maxNumberSittingPlaces;
@@ -16,12 +16,12 @@ public class SittingObject : InteractibleObject
 
     private void Start()
     {
-        robots = new RobotBuyerController[maxNumberSittingPlaces];
-    }
+        robots = new List<RobotBuyerController>(new RobotBuyerController[maxNumberSittingPlaces]);
 
+    }
     public Transform GetFreeQueuePlace()
     {
-        int index = Array.IndexOf(robots, null);
+        int index = robots.IndexOf(null);
         return sittingPlaces[index];
     }
     public void UpdCurrentQueueSize(int index)
@@ -39,7 +39,7 @@ public class SittingObject : InteractibleObject
 
     public void AddPersonToQueue(RobotBuyerController robot)
     {
-        int index = Array.IndexOf(robots, null);
+        int index = robots.IndexOf(null);
         robots[index] = robot;
         UpdCurrentQueueSize(1);
 
@@ -47,7 +47,7 @@ public class SittingObject : InteractibleObject
     }
     private void RemovePersonFromQueue(RobotBuyerController robot)
     {
-        int index = Array.IndexOf(robots, robot);
+        int index = robots.IndexOf(robot);
         robots[index] = null;
         UpdCurrentQueueSize(-1);
     }
