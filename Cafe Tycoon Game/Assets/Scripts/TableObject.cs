@@ -11,14 +11,15 @@ public class TableObject : InteractibleObject
     private Transform[] sittingPlaces;
     private int _currentNumberSittingPlaces = 0;
     public bool IsQueueFree => _currentNumberSittingPlaces < maxNumberSittingPlaces;
-
-    private RobotBuyerController _previousFirstRobot;
+    public bool IsFullOfChairs => maxNumberSittingPlaces == sittingPlaces.Length;
 
     private void Start()
     {
         robots = new List<RobotBuyerController>(new RobotBuyerController[maxNumberSittingPlaces]);
 
     }
+
+    #region Client Handler
     public Transform GetFreeQueuePlace()
     {
         int index = robots.IndexOf(null);
@@ -50,5 +51,23 @@ public class TableObject : InteractibleObject
         int index = robots.IndexOf(robot);
         robots[index] = null;
         UpdCurrentQueueSize(-1);
+    }
+    #endregion
+
+
+    protected override void ActionOnClick()
+    {
+        UIManager.Instance.SetAndShowTablePopUp(description, this);
+    }
+
+    public void UpdMaxQueueSize()
+    {
+        sittingPlaces[maxNumberSittingPlaces].gameObject.SetActive(true);
+        maxNumberSittingPlaces++;
+        robots.Add(null);
+    }
+    public int GetLastAddedChairNumber()
+    {
+        return maxNumberSittingPlaces - 1;
     }
 }

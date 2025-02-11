@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public class MachinePopUpHolder : MonoBehaviour
 {
+    [SerializeField] private BuyItemPopUpHolder buyItemPopUp;
     [Header("Info")]
     [SerializeField] private TMP_Text Title;
     [SerializeField] private Image Icon;
@@ -26,6 +27,7 @@ public class MachinePopUpHolder : MonoBehaviour
 
     private void Awake()
     {
+        buyItemPopUp.gameObject.SetActive(false);
         priceLevelUpButton?.onClick.AddListener(LevelUpPrice);
         queueCapacityLevelUpButton?.onClick.AddListener(QueueCapacityLevelUp);
     }
@@ -38,6 +40,9 @@ public class MachinePopUpHolder : MonoBehaviour
         Level.text = level.ToString();
 
         machine = machineObject;
+
+        if (!machine.IsAvaliable) buyItemPopUp.gameObject.SetActive(true);
+
         if (!machine.IsQueueFullLevelUp) queueCapacityLevelUpButton.interactable = true;
         else queueCapacityLevelUpButton.interactable = false;
     }

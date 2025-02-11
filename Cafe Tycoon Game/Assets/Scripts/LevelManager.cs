@@ -29,7 +29,7 @@ public class LevelManager : MonoBehaviour
 
         foreach (var seller in sellerObjects)
         {
-            if (seller.IsQueueFree)// && seller.IsAvaliable)
+            if (seller.IsQueueFree && seller.IsAvaliable)
             {
                 machineQueue = seller.GetFreeQueuePlace();
                 machine = seller;
@@ -38,7 +38,7 @@ public class LevelManager : MonoBehaviour
         }
         foreach (var place in sittingObjects)
         {
-            if (place.IsQueueFree)// && place.IsAvaliable)
+            if (place.IsQueueFree && place.IsAvaliable)
             {
                 tableQueue = place.GetFreeQueuePlace();
                 table = place;

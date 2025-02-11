@@ -108,8 +108,8 @@ MonoBehaviour:
   basePrice: 0
   timeDelay: 2
   robots: []
-  description: {fileID: 0}
-  maxNumberSittingPlaces: 5
+  description: {fileID: 11400000, guid: 9e7bd7b24cfedef488840aa9503bbca2, type: 2}
+  maxNumberSittingPlaces: 1
   sittingPlaces:
   - {fileID: 2685382462763193445}
   - {fileID: 3547566988259490255}
@@ -206,7 +206,7 @@ PrefabInstance:
     - target: {fileID: 7005935861854922532, guid: d0fe060228badba49bacc1a0ba43cc02,
         type: 3}
       propertyPath: m_Name
-      value: chair_3
+      value: Chair 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -286,7 +286,12 @@ PrefabInstance:
     - target: {fileID: 7005935861854922532, guid: d0fe060228badba49bacc1a0ba43cc02,
         type: 3}
       propertyPath: m_Name
-      value: chair_3 (3)
+      value: Chair 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7005935861854922532, guid: d0fe060228badba49bacc1a0ba43cc02,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -366,7 +371,12 @@ PrefabInstance:
     - target: {fileID: 7005935861854922532, guid: d0fe060228badba49bacc1a0ba43cc02,
         type: 3}
       propertyPath: m_Name
-      value: chair_3 (4)
+      value: Chair 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7005935861854922532, guid: d0fe060228badba49bacc1a0ba43cc02,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -446,7 +456,12 @@ PrefabInstance:
     - target: {fileID: 7005935861854922532, guid: d0fe060228badba49bacc1a0ba43cc02,
         type: 3}
       propertyPath: m_Name
-      value: chair_3 (2)
+      value: Chair 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7005935861854922532, guid: d0fe060228badba49bacc1a0ba43cc02,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -600,7 +615,12 @@ PrefabInstance:
     - target: {fileID: 7005935861854922532, guid: d0fe060228badba49bacc1a0ba43cc02,
         type: 3}
       propertyPath: m_Name
-      value: chair_3 (1)
+      value: Chair 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7005935861854922532, guid: d0fe060228badba49bacc1a0ba43cc02,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -10,22 +10,15 @@ public class UIManager : Singleton<UIManager>
     public TablePopUpHolder TableUpdatePopUp;
     [Header("Machine Pop up Settings")]
     public MachinePopUpHolder MachineUpdatePopUp;
-    [Header("Counter Pop up Settings")]
-    public CounterPopUpHolder CounterUpdatePopUp;
 
     public void SetAndShowMachinePopUp(DescriptionBase description, int level, MachineObject machineObject)
     {
         MachineUpdatePopUp.SetPopUp(description, level, machineObject);
         MachineUpdatePopUp.gameObject.SetActive(true);
     }
-    public void SetAndShowTablePopUp(DescriptionBase description)
+    public void SetAndShowTablePopUp(DescriptionBase description, TableObject tableObject)
     {
-        TableUpdatePopUp.SetPopUp(description);
+        TableUpdatePopUp.SetPopUp(description, tableObject);
         TableUpdatePopUp.gameObject.SetActive(true);
-    }
-    public void SetAndShowCounterPopUp(DescriptionBase description, int price)
-    {
-        CounterUpdatePopUp.SetPopUp(description, price);
-        CounterUpdatePopUp.gameObject.SetActive(true);
     }
 }

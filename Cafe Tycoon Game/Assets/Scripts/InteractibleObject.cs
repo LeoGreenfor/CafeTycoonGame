@@ -43,6 +43,5 @@ public class InteractibleObject : MonoBehaviour
 
     protected virtual void ActionOnClick()
     {
-
     }
 }
