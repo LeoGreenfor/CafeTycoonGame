@@ -8,7 +8,7 @@ public class TableObject : InteractibleObject
     [SerializeField]
     private float priceForQueueLevelUp;
 
-    private void Start()
+    private void Awake()
     {
         robots = new List<RobotBuyerController>(new RobotBuyerController[maxQueueSize]);
     }

@@ -14,7 +14,7 @@ public class MachineObject : InteractibleObject
 
     private RobotBuyerController _previousFirstRobot;
 
-    private void Start()
+    private void Awake()
     {
         robots = new List<RobotBuyerController>(new RobotBuyerController[maxQueueSize]);
     }

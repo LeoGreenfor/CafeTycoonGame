@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
@@ -19,6 +18,7 @@ public class GameManager : Singleton<GameManager>
         set
         {
             money = value;
+            money = Mathf.Round(money * 10f) / 10f;
             moneyLabel.text = money.ToString();
         }
     }
