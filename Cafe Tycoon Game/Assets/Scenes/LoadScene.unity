@@ -96,8 +96,10 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: af598a5eb990dac4ca9d5c514ea5a2e1,
+    type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 604622216e9a4804b913416d25911b81,
+    type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2729,6 +2731,7 @@ GameObject:
   - component: {fileID: 1934008668}
   - component: {fileID: 1934008667}
   - component: {fileID: 1934008666}
+  - component: {fileID: 1934008669}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2810,6 +2813,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -4, y: 33, z: 0}
+--- !u!114 &1934008669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934008665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 2fb7c99e7dfa6054193715c34740ad10, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!1001 &1959958091
 PrefabInstance:
   m_ObjectHideFlags: 0
