@@ -21,7 +21,6 @@ public class TablePopUpHolder : MonoBehaviour
 
     private void Awake()
     {
-        buyItemPopUp.gameObject.SetActive(false);
         addChairButton?.onClick.AddListener(AddChairToTable);
     }
 
@@ -32,7 +31,8 @@ public class TablePopUpHolder : MonoBehaviour
 
         table = tableObject;
 
-        if (!table.IsAvaliable) buyItemPopUp.gameObject.SetActive(true);
+        buyItemPopUp.SetPopUp(table.GetItemPrice(), table);
+        buyItemPopUp.gameObject.SetActive(!table.IsAvaliable);
 
         ShowChairsIcons(table.GetLastAddedChairNumber());
         if (!table.IsFullOfChairs) addChairButton.interactable = true;
@@ -41,17 +41,30 @@ public class TablePopUpHolder : MonoBehaviour
 
     private async void AddChairToTable()
     {
+        float newPrice = table.GetPriceForQueueLevelUp();
+
+        if (newPrice > GameManager.Instance.Money) return;
+
+        GameManager.Instance.Money -= newPrice;
+        newPrice = GameManager.Instance.LinearGrowth(newPrice);
+
         fillImage.fillAmount += 0.1f;
 
         if (fillImage.fillAmount >= 1)
         {
             addChairButton.interactable = false;
             table.UpdMaxQueueSize();
+
+            newPrice = GameManager.Instance.ExponentialGrowth(newPrice);
+
             await Task.Delay(2000);
             fillImage.fillAmount = 0;
             chairsIcons[table.GetLastAddedChairNumber()].gameObject.SetActive(true);
             if (!table.IsFullOfChairs) addChairButton.interactable = true;
+            else GameManager.Instance.Level++;
         }
+
+        table.UpdPriceForQueueLevelUp(newPrice);
     }
 
     private void ShowChairsIcons(int unlockedChairsCount)
@@ -61,7 +74,9 @@ public class TablePopUpHolder : MonoBehaviour
             chair.gameObject.SetActive(false);
         }
 
-        for (int i = 0; i <= unlockedChairsCount; i++)
+        chairsIcons[0].gameObject.SetActive(true);
+
+        for (int i = 1; i <= unlockedChairsCount; i++)
         {
             chairsIcons[i].gameObject.SetActive(true);
         }

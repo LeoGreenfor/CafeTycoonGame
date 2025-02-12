@@ -5,15 +5,33 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class InteractibleObject : MonoBehaviour
 {
-    public bool IsAvaliable;
+    public bool IsAvaliable
+    {
+        get
+        {
+            return _isAvaliable;
+        }
+        set
+        {
+            _isAvaliable = value;
+            if (value) OnIsAvailable();
+            Debug.Log("a");
+        }
+    }
+    [SerializeField] 
+    private bool _isAvaliable;
     [SerializeField]
-    protected float basePrice;
+    protected float itemPrice;
     [SerializeField]
     protected float timeDelay;
     [SerializeField]
     protected List<RobotBuyerController> robots;
     [SerializeField]
     protected DescriptionBase description;
+
+    [Header("Visuals")]
+    [SerializeField] private MeshRenderer meshRenderer;
+    [SerializeField] private Material unlockedMaterial;
 
     private void Update()
     {
@@ -43,5 +61,14 @@ public class InteractibleObject : MonoBehaviour
 
     protected virtual void ActionOnClick()
     {
+    }
+
+    protected virtual void OnIsAvailable()
+    {
+        meshRenderer.material = unlockedMaterial;
+    }
+    public float GetItemPrice()
+    {
+        return itemPrice;
     }
 }

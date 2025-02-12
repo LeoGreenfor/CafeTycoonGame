@@ -20,12 +20,10 @@ public class MachineObject : InteractibleObject
     public bool IsQueueFullLevelUp => maxQueueSize == queuePlaces.Length;
 
     private RobotBuyerController _previousFirstRobot;
-    private float _currentPrice;
 
     private void Start()
     {
         robots = new List<RobotBuyerController>(new RobotBuyerController[maxQueueSize]);
-        _currentPrice = basePrice;
     }
 
     #region Client Handle
@@ -43,6 +41,7 @@ public class MachineObject : InteractibleObject
     {
         yield return new WaitForSeconds(timeDelay);
         client.IsBoughtItem = true;
+        GameManager.Instance.Money += profits;
         RemoveFirstPersonFromQueue();
     }
 
@@ -82,7 +81,13 @@ public class MachineObject : InteractibleObject
 
     protected override void ActionOnClick()
     {
+        base.ActionOnClick();
         UIManager.Instance.SetAndShowMachinePopUp(description, level, this);
+    }
+    protected override void OnIsAvailable()
+    {
+        base.OnIsAvailable();
+        UpdMaxQueueSize();
     }
 
     public void UpdMaxQueueSize()
@@ -91,12 +96,39 @@ public class MachineObject : InteractibleObject
         maxQueueSize++;
         robots.Add(null);
     }
-    public void UpdPricePerItem()
+
+    #region Economics
+
+    [SerializeField]
+    private float profits;
+    [SerializeField]
+    private float priceForProfitsLevelUp;
+    [SerializeField]
+    private float priceForQueueLevelUp;
+
+    public void UpdProfits(float price)
     {
-        _currentPrice++;
+        profits = price;
     }
-    public float GetCurrentPrice()
+    public float GetProfit()
     {
-        return _currentPrice;
+        return profits;
     }
+    public void UpdPriceForProfitsLevelUp(float price)
+    {
+        priceForProfitsLevelUp = price;
+    }
+    public float GetPriceForProfitsLevelUp() 
+    {
+        return priceForProfitsLevelUp;
+    }
+    public void UpdPriceForQueueLevelUp(float price)
+    {
+        priceForQueueLevelUp = price;
+    }
+    public float GetPriceForQueueLevelUp()
+    {
+        return priceForQueueLevelUp;
+    }
+    #endregion
 }

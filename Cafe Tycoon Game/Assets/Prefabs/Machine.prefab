@@ -164,18 +164,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c01eca57a648614e95562c684a8e32b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsAvaliable: 0
-  basePrice: 0
+  _isAvaliable: 0
+  itemPrice: 10
   timeDelay: 10
   robots: []
   description: {fileID: 0}
+  meshRenderer: {fileID: 0}
+  unlockedMaterial: {fileID: 2100000, guid: 67bcc186fbc3d0a40a64c65e1e34b04d, type: 2}
   level: 0
-  maxQueueSize: 1
+  maxQueueSize: 0
   queuePlaces:
   - {fileID: 8491735421618435852}
   - {fileID: 3489460928039553844}
   - {fileID: 8891279580051289137}
   moneyParticleSystem: {fileID: 0}
+  profits: 10
+  priceForProfitsLevelUp: 2
+  priceForQueueLevelUp: 2
 --- !u!65 &25110059725556398
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -214,7 +219,7 @@ GameObject:
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8491735421618435852
 Transform:
   m_ObjectHideFlags: 0

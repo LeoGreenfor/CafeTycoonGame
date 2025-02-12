@@ -28,7 +28,11 @@ public class BuyItemPopUpHolder : MonoBehaviour
 
     private void BuyItem()
     {
-        item.gameObject.SetActive(true);
+        float price = item.GetItemPrice();
+        if (price > GameManager.Instance.Money) return;
+
+        GameManager.Instance.Money -= price;
+        GameManager.Instance.Level++;
         item.IsAvaliable = true;
         gameObject.SetActive(false);
     }

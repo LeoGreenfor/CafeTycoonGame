@@ -15,10 +15,12 @@ public class UIManager : Singleton<UIManager>
     {
         MachineUpdatePopUp.SetPopUp(description, level, machineObject);
         MachineUpdatePopUp.gameObject.SetActive(true);
+        TableUpdatePopUp.gameObject.SetActive(false);
     }
     public void SetAndShowTablePopUp(DescriptionBase description, TableObject tableObject)
     {
         TableUpdatePopUp.SetPopUp(description, tableObject);
         TableUpdatePopUp.gameObject.SetActive(true);
+        MachineUpdatePopUp.gameObject.SetActive(false);
     }
 }

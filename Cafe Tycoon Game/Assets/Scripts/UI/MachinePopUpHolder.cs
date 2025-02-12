@@ -27,7 +27,6 @@ public class MachinePopUpHolder : MonoBehaviour
 
     private void Awake()
     {
-        buyItemPopUp.gameObject.SetActive(false);
         priceLevelUpButton?.onClick.AddListener(LevelUpPrice);
         queueCapacityLevelUpButton?.onClick.AddListener(QueueCapacityLevelUp);
     }
@@ -41,7 +40,8 @@ public class MachinePopUpHolder : MonoBehaviour
 
         machine = machineObject;
 
-        if (!machine.IsAvaliable) buyItemPopUp.gameObject.SetActive(true);
+        buyItemPopUp.SetPopUp(machine.GetItemPrice(), machine);
+        buyItemPopUp.gameObject.SetActive(!machine.IsAvaliable);
 
         if (!machine.IsQueueFullLevelUp) queueCapacityLevelUpButton.interactable = true;
         else queueCapacityLevelUpButton.interactable = false;
@@ -49,28 +49,57 @@ public class MachinePopUpHolder : MonoBehaviour
 
     private async void LevelUpPrice()
     {
+        float newPrice = machine.GetPriceForProfitsLevelUp();
+
+        if (newPrice > GameManager.Instance.Money) return;
+
+        GameManager.Instance.Money -= newPrice;
         priceFillLevel.fillAmount += 0.1f;
+
+        float newProfit = machine.GetProfit();
+        newProfit = GameManager.Instance.LinearGrowth(newProfit);
+        newPrice = GameManager.Instance.LinearGrowth(newPrice);
+
         if (priceFillLevel.fillAmount >= 1)
         {
             priceLevelUpButton.interactable = false;
-            machine.UpdPricePerItem();
-            await Task.Delay(2000);
+
+            newProfit = GameManager.Instance.ExponentialGrowth(newProfit);
+            newPrice = GameManager.Instance.ExponentialGrowth(newPrice);
+
+            await Task.Delay(1000);
             priceFillLevel.fillAmount = 0;
             priceLevelUpButton.interactable = true;
-            priceLabel.text = "Current price: " + machine.GetCurrentPrice();
+            priceLabel.text = "Current profit: " + newProfit + "/per";
         }
+
+        machine.UpdProfits(newProfit);
+        machine.UpdPriceForProfitsLevelUp(newPrice);
     }
     private async void QueueCapacityLevelUp()
     {
+        float newPrice = machine.GetPriceForQueueLevelUp();
+
+        if (newPrice > GameManager.Instance.Money) return;
+
+        GameManager.Instance.Money -= newPrice;
+        newPrice = GameManager.Instance.LinearGrowth(newPrice);
+
         queueFillLevel.fillAmount += 0.1f;
         if (queueFillLevel.fillAmount >= 1)
         {
             queueCapacityLevelUpButton.interactable = false;
             machine.UpdMaxQueueSize();
-            await Task.Delay(2000);
+            
+            newPrice = GameManager.Instance.ExponentialGrowth(newPrice);
+            
+            await Task.Delay(1000);
             queueFillLevel.fillAmount = 0;
             if (!machine.IsQueueFullLevelUp) queueCapacityLevelUpButton.interactable = true;
+            else GameManager.Instance.Level++;
         }
+
+        machine.UpdPriceForQueueLevelUp(newPrice);
     }
 
     private void OnDestroy()

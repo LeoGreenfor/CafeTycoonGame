@@ -12,11 +12,12 @@ public class TableObject : InteractibleObject
     private int _currentNumberSittingPlaces = 0;
     public bool IsQueueFree => _currentNumberSittingPlaces < maxNumberSittingPlaces;
     public bool IsFullOfChairs => maxNumberSittingPlaces == sittingPlaces.Length;
+    [SerializeField]
+    private float priceForQueueLevelUp;
 
     private void Start()
     {
         robots = new List<RobotBuyerController>(new RobotBuyerController[maxNumberSittingPlaces]);
-
     }
 
     #region Client Handler
@@ -54,10 +55,15 @@ public class TableObject : InteractibleObject
     }
     #endregion
 
-
     protected override void ActionOnClick()
     {
+        base.ActionOnClick();
         UIManager.Instance.SetAndShowTablePopUp(description, this);
+    }
+    protected override void OnIsAvailable()
+    {
+        base.OnIsAvailable();
+        UpdMaxQueueSize();
     }
 
     public void UpdMaxQueueSize()
@@ -65,6 +71,14 @@ public class TableObject : InteractibleObject
         sittingPlaces[maxNumberSittingPlaces].gameObject.SetActive(true);
         maxNumberSittingPlaces++;
         robots.Add(null);
+    }
+    public void UpdPriceForQueueLevelUp(float price)
+    {
+        priceForQueueLevelUp = price;
+    }
+    public float GetPriceForQueueLevelUp()
+    {
+        return priceForQueueLevelUp;
     }
     public int GetLastAddedChairNumber()
     {
