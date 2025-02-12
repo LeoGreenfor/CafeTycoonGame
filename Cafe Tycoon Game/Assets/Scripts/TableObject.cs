@@ -6,29 +6,22 @@ using UnityEngine;
 public class TableObject : InteractibleObject
 {
     [SerializeField]
-    private int maxNumberSittingPlaces;
-    [SerializeField]
-    private Transform[] sittingPlaces;
-    private int _currentNumberSittingPlaces = 0;
-    public bool IsQueueFree => _currentNumberSittingPlaces < maxNumberSittingPlaces;
-    public bool IsFullOfChairs => maxNumberSittingPlaces == sittingPlaces.Length;
-    [SerializeField]
     private float priceForQueueLevelUp;
 
     private void Start()
     {
-        robots = new List<RobotBuyerController>(new RobotBuyerController[maxNumberSittingPlaces]);
+        robots = new List<RobotBuyerController>(new RobotBuyerController[maxQueueSize]);
     }
 
     #region Client Handler
     public Transform GetFreeQueuePlace()
     {
         int index = robots.IndexOf(null);
-        return sittingPlaces[index];
+        return queuePlaces[index];
     }
     public void UpdCurrentQueueSize(int index)
     {
-        _currentNumberSittingPlaces += index;
+        _currentQueueSize += index;
     }
 
     public IEnumerator ServeClient(RobotBuyerController client)
@@ -63,14 +56,23 @@ public class TableObject : InteractibleObject
     protected override void OnIsAvailable()
     {
         base.OnIsAvailable();
-        UpdMaxQueueSize();
+        UpdMaxQueueSize(1);
     }
 
     public void UpdMaxQueueSize()
     {
-        sittingPlaces[maxNumberSittingPlaces].gameObject.SetActive(true);
-        maxNumberSittingPlaces++;
+        queuePlaces[maxQueueSize].gameObject.SetActive(true);
+        maxQueueSize++;
         robots.Add(null);
+    }
+    public void UpdMaxQueueSize(int length)
+    {
+        for (int i = 0; i < length; i++)
+        {
+            queuePlaces[i].gameObject.SetActive(true);
+            robots.Add(null);
+        }
+        maxQueueSize = length;
     }
     public void UpdPriceForQueueLevelUp(float price)
     {
@@ -82,6 +84,6 @@ public class TableObject : InteractibleObject
     }
     public int GetLastAddedChairNumber()
     {
-        return maxNumberSittingPlaces - 1;
+        return maxQueueSize - 1;
     }
 }

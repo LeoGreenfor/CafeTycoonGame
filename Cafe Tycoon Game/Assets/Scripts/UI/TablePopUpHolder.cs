@@ -35,7 +35,7 @@ public class TablePopUpHolder : MonoBehaviour
         buyItemPopUp.gameObject.SetActive(!table.IsAvaliable);
 
         ShowChairsIcons(table.GetLastAddedChairNumber());
-        if (!table.IsFullOfChairs) addChairButton.interactable = true;
+        if (!table.IsQueueFullLevelUp) addChairButton.interactable = true;
         else addChairButton.interactable = false;
     }
 
@@ -60,7 +60,7 @@ public class TablePopUpHolder : MonoBehaviour
             await Task.Delay(2000);
             fillImage.fillAmount = 0;
             chairsIcons[table.GetLastAddedChairNumber()].gameObject.SetActive(true);
-            if (!table.IsFullOfChairs) addChairButton.interactable = true;
+            if (!table.IsQueueFullLevelUp) addChairButton.interactable = true;
             else GameManager.Instance.Level++;
         }
 

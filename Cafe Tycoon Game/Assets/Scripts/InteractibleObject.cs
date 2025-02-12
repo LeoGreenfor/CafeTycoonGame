@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class InteractibleObject : MonoBehaviour
 {
+    public bool IsQueueFullLevelUp => maxQueueSize == queuePlaces.Length;
+    public bool IsQueueFree => _currentQueueSize < maxQueueSize;
     public bool IsAvaliable
     {
         get
@@ -15,11 +17,15 @@ public class InteractibleObject : MonoBehaviour
         {
             _isAvaliable = value;
             if (value) OnIsAvailable();
-            Debug.Log("a");
         }
     }
     [SerializeField] 
     private bool _isAvaliable;
+    [SerializeField]
+    protected Transform[] queuePlaces;
+    [SerializeField]
+    protected int maxQueueSize;
+    protected int _currentQueueSize = 0;
     [SerializeField]
     protected float itemPrice;
     [SerializeField]
@@ -70,5 +76,9 @@ public class InteractibleObject : MonoBehaviour
     public float GetItemPrice()
     {
         return itemPrice;
+    }
+    public int GetMaxQueueSize()
+    {
+        return maxQueueSize;
     }
 }

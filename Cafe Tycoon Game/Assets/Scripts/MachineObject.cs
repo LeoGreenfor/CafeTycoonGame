@@ -10,14 +10,7 @@ public class MachineObject : InteractibleObject
     [SerializeField]
     private int level;
     [SerializeField]
-    private int maxQueueSize;
-    private int _currentQueueSize = 0;
-    [SerializeField]
-    private Transform[] queuePlaces;
-    [SerializeField]
     private ParticleSystem moneyParticleSystem;
-    public bool IsQueueFree => _currentQueueSize < maxQueueSize;
-    public bool IsQueueFullLevelUp => maxQueueSize == queuePlaces.Length;
 
     private RobotBuyerController _previousFirstRobot;
 
@@ -87,7 +80,7 @@ public class MachineObject : InteractibleObject
     protected override void OnIsAvailable()
     {
         base.OnIsAvailable();
-        UpdMaxQueueSize();
+        UpdMaxQueueSize(1);
     }
 
     public void UpdMaxQueueSize()
@@ -95,6 +88,16 @@ public class MachineObject : InteractibleObject
         queuePlaces[maxQueueSize].gameObject.SetActive(true);
         maxQueueSize++;
         robots.Add(null);
+    }
+
+    public void UpdMaxQueueSize(int length)
+    {
+        for (int i = 0; i < length; i++)
+        {
+            queuePlaces[i].gameObject.SetActive(true);
+            robots.Add(null);
+        }
+        maxQueueSize = length;
     }
 
     #region Economics

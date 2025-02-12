@@ -103,19 +103,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isAvaliable: 0
-  basePrice: 0
-  timeDelay: 2
-  robots: []
-  description: {fileID: 11400000, guid: 9e7bd7b24cfedef488840aa9503bbca2, type: 2}
-  meshRenderer: {fileID: 8823916684986351593}
-  unlockedMaterial: {fileID: 2100000, guid: 67bcc186fbc3d0a40a64c65e1e34b04d, type: 2}
-  maxNumberSittingPlaces: 0
-  sittingPlaces:
+  queuePlaces:
   - {fileID: 2685382462763193445}
   - {fileID: 3547566988259490255}
   - {fileID: 3262234782849270701}
   - {fileID: 3512108411136977796}
   - {fileID: 8188166441398439667}
+  maxQueueSize: 0
+  itemPrice: 0
+  timeDelay: 3
+  robots: []
+  description: {fileID: 11400000, guid: 9e7bd7b24cfedef488840aa9503bbca2, type: 2}
+  meshRenderer: {fileID: 8823916684986351593}
+  unlockedMaterial: {fileID: 2100000, guid: 67bcc186fbc3d0a40a64c65e1e34b04d, type: 2}
+  priceForQueueLevelUp: 7
 --- !u!136 &6802958017306863794
 CapsuleCollider:
   m_ObjectHideFlags: 0
