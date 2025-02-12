@@ -940,9 +940,11 @@ MonoBehaviour:
   Icon: {fileID: 2967511300499664369}
   Description: {fileID: 487783367969653597}
   Level: {fileID: 8226668795909007777}
+  priceLevelUpProfitTemplate: Level Up Profits!
   priceLevelUpButton: {fileID: 2616890726364967273}
   priceFillLevel: {fileID: 2249788847568071852}
   priceLabel: {fileID: 6558562655779968600}
+  priceLevelUpQueueTemplate: Level Up Queue!
   queueCapacityLevelUpButton: {fileID: 512019342213697386}
   queueFillLevel: {fileID: 4893593755466474837}
   queueLabel: {fileID: 2001387797861172364}
@@ -1058,6 +1060,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Label
+      objectReference: {fileID: 0}
+    - target: {fileID: 6681647838084321158, guid: 923029400932fbd4abcf7e13dd8fb212,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 6681647838084321158, guid: 923029400932fbd4abcf7e13dd8fb212,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 6681647838084321158, guid: 923029400932fbd4abcf7e13dd8fb212,
         type: 3}
@@ -1841,6 +1853,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Label
+      objectReference: {fileID: 0}
+    - target: {fileID: 6681647838084321158, guid: 923029400932fbd4abcf7e13dd8fb212,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 6681647838084321158, guid: 923029400932fbd4abcf7e13dd8fb212,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 6681647838084321158, guid: 923029400932fbd4abcf7e13dd8fb212,
         type: 3}

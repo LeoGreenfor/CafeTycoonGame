@@ -16,9 +16,11 @@ public class MachinePopUpHolder : MonoBehaviour
     [SerializeField] private TMP_Text Description;
     [SerializeField] private TMP_Text Level;
     [Header("Buttons")]
+    [SerializeField] private string priceLevelUpProfitTemplate;
     [SerializeField] private Button priceLevelUpButton;
     [SerializeField] private Image priceFillLevel;
     [SerializeField] private TMP_Text priceLabel;
+    [SerializeField] private string priceLevelUpQueueTemplate;
     [SerializeField] private Button queueCapacityLevelUpButton;
     [SerializeField] private Image queueFillLevel;
     [SerializeField] private TMP_Text queueLabel;
@@ -39,6 +41,9 @@ public class MachinePopUpHolder : MonoBehaviour
         Level.text = level.ToString();
 
         machine = machineObject;
+
+        queueLabel.text = $"{priceLevelUpQueueTemplate} {machine.GetPriceForQueueLevelUp()}$";
+        priceLabel.text = $"{priceLevelUpProfitTemplate} {machine.GetPriceForProfitsLevelUp()}$";
 
         buyItemPopUp.SetPopUp(machine.GetItemPrice(), machine);
         buyItemPopUp.gameObject.SetActive(!machine.IsAvaliable);
@@ -75,6 +80,8 @@ public class MachinePopUpHolder : MonoBehaviour
 
         machine.UpdProfits(newProfit);
         machine.UpdPriceForProfitsLevelUp(newPrice);
+
+        priceLabel.text = $"{priceLevelUpProfitTemplate} {newPrice}$";
     }
     private async void QueueCapacityLevelUp()
     {
@@ -100,6 +107,8 @@ public class MachinePopUpHolder : MonoBehaviour
         }
 
         machine.UpdPriceForQueueLevelUp(newPrice);
+
+        queueLabel.text = $"{priceLevelUpQueueTemplate} {newPrice}$";
     }
 
     private void OnDestroy()

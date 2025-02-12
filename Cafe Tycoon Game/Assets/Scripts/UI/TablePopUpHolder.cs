@@ -14,7 +14,9 @@ public class TablePopUpHolder : MonoBehaviour
     [SerializeField] private TMP_Text Description;
     [SerializeField] private Image[] chairsIcons;
     [Header("Buttons")]
+    [SerializeField] private string priceLevelUpQueueTemplate;
     [SerializeField] private Button addChairButton;
+    [SerializeField] private TMP_Text addChairLabel;
     [SerializeField] private Image fillImage;
 
     private TableObject table;
@@ -30,6 +32,8 @@ public class TablePopUpHolder : MonoBehaviour
         Description.text = description.Description;
 
         table = tableObject;
+
+        addChairLabel.text = $"{priceLevelUpQueueTemplate} {table.GetPriceForQueueLevelUp()}";
 
         buyItemPopUp.SetPopUp(table.GetItemPrice(), table);
         buyItemPopUp.gameObject.SetActive(!table.IsAvaliable);
@@ -65,6 +69,8 @@ public class TablePopUpHolder : MonoBehaviour
         }
 
         table.UpdPriceForQueueLevelUp(newPrice);
+
+        addChairLabel.text = $"{priceLevelUpQueueTemplate} {newPrice}";
     }
 
     private void ShowChairsIcons(int unlockedChairsCount)

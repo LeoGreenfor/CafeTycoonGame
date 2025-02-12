@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -50,10 +51,10 @@ public class GameManager : Singleton<GameManager>
 
     public float LinearGrowth(float price)
     {
-        return price + (multiplier * Level);
+        return Mathf.Round((price + (multiplier * Level)) * 10f) / 10f;
     }
     public float ExponentialGrowth(float price)
     {
-        return price * Mathf.Pow(multiplier, Level);
+        return Mathf.Round((price * Mathf.Pow(multiplier, Level)) * 10f) / 10f;
     }
 }
