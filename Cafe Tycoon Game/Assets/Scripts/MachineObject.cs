@@ -34,6 +34,7 @@ public class MachineObject : InteractibleObject
     {
         yield return new WaitForSeconds(timeDelay);
         client.IsBoughtItem = true;
+        moneyParticleSystem.Play();
         GameManager.Instance.Money += profits;
         RemoveFirstPersonFromQueue();
     }

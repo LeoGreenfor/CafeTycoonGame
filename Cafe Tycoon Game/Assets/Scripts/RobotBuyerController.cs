@@ -30,7 +30,7 @@ public class RobotBuyerController : MonoBehaviour
         set
         {
             _isCompleteSitting = value;
-            if (value) LeaveTable();
+            if (value) StartCoroutine(LeaveTable());
         }
         get
         {
@@ -40,10 +40,17 @@ public class RobotBuyerController : MonoBehaviour
     }
     public bool IsAtTable;
     private bool hasArrived = false;
+    [SerializeField]
+    private ParticleSystem starsParticleSystem;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+    }
+
+    private void Start()
+    {
+        starsParticleSystem.Play();
     }
 
     private void FixedUpdate()
@@ -104,8 +111,11 @@ public class RobotBuyerController : MonoBehaviour
     {
         MoveTo(_tablePlace.position);
     }
-    private void LeaveTable()
+    private IEnumerator LeaveTable()
     {
+        starsParticleSystem.Play();
+
+        yield return new WaitUntil(() => !starsParticleSystem.isPlaying);
         Destroy(gameObject);
     }
 }

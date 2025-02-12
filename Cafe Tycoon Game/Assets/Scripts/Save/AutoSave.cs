@@ -33,8 +33,6 @@ public class AutoSave : Singleton<AutoSave>
     {
         gameData = SaveSystem.Load();
 
-        Debug.Log(gameData.money);
-
         Machines = gameData.DataToMachine(Machines);
         Tables = gameData.DataToTable(Tables);
         GameManager.Instance.Money = gameData.money;
