@@ -8655,14 +8655,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _persistent: 1
   IsHaveRobotStatue: 0
-  money: 55
+  money: 100
   level: 1
   multiplier: 1.15
   moneyLabel: {fileID: 1355902849}
   levelLabel: {fileID: 1147945932}
   buildRobotSystem: {fileID: 2101981724}
   RobotPieceCount: 0
-  coastOfBuild: 3
+  coastOfBuild: 6
   robotPieceLabel: {fileID: 1527812026}
 --- !u!1001 &1558634099
 PrefabInstance:
