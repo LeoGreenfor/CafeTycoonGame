@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Title: Tea
   Icon: {fileID: 21300000, guid: d323a7b8208b388429b36db100130f14, type: 3}
-  Description: 
+  Description: A sleek machine that brews tea at the perfect temperature, filling
+    the air with a soothing aroma. It offers multiple settings for different tea
+    types.

@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Title: Table
   Icon: {fileID: 21300000, guid: 8e29030be6353934b810afac39c1283a, type: 3}
-  Description: 
+  Description: A sturdy wooden surface, polished smooth and inviting. It serves as
+    a gathering place for meals, drinks, and conversation.

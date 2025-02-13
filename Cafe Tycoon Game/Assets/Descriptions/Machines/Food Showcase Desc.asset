@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Title: Food showcase
   Icon: {fileID: 21300000, guid: 6bba13d068c72e549b2c399c3fda1d2e, type: 3}
-  Description: 
+  Description: A glass display filled with an assortment of beautifully decorated
+    cakes. Soft lighting highlights the textures and colors of each dessert.
