@@ -37,6 +37,8 @@ public class AutoSave : Singleton<AutoSave>
         Tables = gameData.DataToTable(Tables);
         GameManager.Instance.Money = gameData.money;
         GameManager.Instance.Level = gameData.level;
+        GameManager.Instance.RobotPieceCount = gameData.robotPieces;
+        GameManager.Instance.LoadRobotStatue();
     }
 
 

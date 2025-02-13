@@ -7,6 +7,7 @@ public class GameData
 {
     public int level;
     public float money;
+    public int robotPieces;
     public MachineObjectData[] machinesData;
     public TableObjectData[] tablesData;
 
@@ -14,6 +15,7 @@ public class GameData
     {
         level = GameManager.Instance.Level;
         money = GameManager.Instance.Money;
+        robotPieces = GameManager.Instance.RobotPieceCount;
         machinesData = machines;
         tablesData = tables;
     }
@@ -21,6 +23,7 @@ public class GameData
     {
         level = GameManager.Instance.Level;
         money = GameManager.Instance.Money;
+        robotPieces = GameManager.Instance.RobotPieceCount;
         machinesData = MachineToData(machines);
         tablesData = TableToData(tables);
     }

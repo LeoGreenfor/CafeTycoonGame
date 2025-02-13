@@ -6,9 +6,11 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    public bool IsHaveRobotStatue;
     [Header("Stats")]
     [SerializeField]
     private float money;
+    private float lastCheckedMoney = 0f;
     public float Money
     {
         get
@@ -20,6 +22,12 @@ public class GameManager : Singleton<GameManager>
             money = value;
             money = Mathf.Round(money * 10f) / 10f;
             moneyLabel.text = money.ToString();
+
+            while (lastCheckedMoney + 20f <= money)
+            {
+                lastCheckedMoney += 20f;
+                AddRobotPiece();
+            }
         }
     }
     [SerializeField]
@@ -43,6 +51,15 @@ public class GameManager : Singleton<GameManager>
     private TMP_Text moneyLabel;
     [SerializeField]
     private TMP_Text levelLabel;
+    [Header("Build Robot")]
+    [SerializeField] 
+    private BuildRobotSystem buildRobotSystem;
+    public int RobotPieceCount = 0;
+    [SerializeField]
+    private int coastOfBuild;
+    [SerializeField]
+    private TMP_Text robotPieceLabel;
+
 
     private void Start()
     {
@@ -56,5 +73,19 @@ public class GameManager : Singleton<GameManager>
     public float ExponentialGrowth(float price)
     {
         return Mathf.Round((price * Mathf.Pow(multiplier, Level)) * 10f) / 10f;
+    }
+
+    public void LoadRobotStatue()
+    {
+        if (RobotPieceCount >= coastOfBuild) buildRobotSystem.BuildRobot();
+    }
+
+    private void AddRobotPiece()
+    {
+        RobotPieceCount ++;
+        robotPieceLabel.text = RobotPieceCount.ToString();
+
+        if (RobotPieceCount >= coastOfBuild) buildRobotSystem.IsCanBuild = true;
+        else buildRobotSystem.IsCanBuild = false;
     }
 }
