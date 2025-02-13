@@ -47,7 +47,12 @@ public class TablePopUpHolder : MonoBehaviour
     {
         float newPrice = table.GetPriceForQueueLevelUp();
 
-        if (newPrice > GameManager.Instance.Money) return;
+        if (newPrice > GameManager.Instance.Money)
+        {
+            SoundManager.Instance.PlaySound(SoundManager.SoundType.Error);
+            return;
+        }
+        SoundManager.Instance.PlaySound(SoundManager.SoundType.PressButton);
 
         GameManager.Instance.Money -= newPrice;
         newPrice = GameManager.Instance.LinearGrowth(newPrice);
@@ -66,6 +71,8 @@ public class TablePopUpHolder : MonoBehaviour
             chairsIcons[table.GetLastAddedChairNumber()].gameObject.SetActive(true);
             if (!table.IsQueueFullLevelUp) addChairButton.interactable = true;
             else GameManager.Instance.Level++;
+
+            SoundManager.Instance.PlaySound(SoundManager.SoundType.LevelUp);
         }
 
         table.UpdPriceForQueueLevelUp(newPrice);

@@ -12,7 +12,7 @@ public class LevelManager : MonoBehaviour
     private TableObject[] sittingObjects;
 
     [SerializeField]
-    private GameObject robotBuyerPrefab;
+    private GameObject[] robotBuyerPrefab;
     [SerializeField]
     private Transform robotSpawnPoint;
     [SerializeField]
@@ -49,7 +49,8 @@ public class LevelManager : MonoBehaviour
 
         if (machine != null && table != null)
         {
-            var robot = Instantiate(robotBuyerPrefab, robotSpawnPoint.position, Quaternion.identity, null);
+            var robot = Instantiate(robotBuyerPrefab[Random.Range(0, robotBuyerPrefab.Length)]
+                , robotSpawnPoint.position, Quaternion.identity, null);
 
             robot.GetComponent<RobotBuyerController>().SetPath(machineQueue, tableQueue);
             machine.AddPersonToQueue(robot.GetComponent<RobotBuyerController>());

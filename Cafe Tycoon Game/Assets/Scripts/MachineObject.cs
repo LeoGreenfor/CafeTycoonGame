@@ -36,6 +36,7 @@ public class MachineObject : InteractibleObject
         client.IsBoughtItem = true;
         moneyParticleSystem.Play();
         GameManager.Instance.Money += profits;
+        SoundManager.Instance.PlaySound(SoundManager.SoundType.RecieveMoney);
         RemoveFirstPersonFromQueue();
     }
 

@@ -56,7 +56,12 @@ public class MachinePopUpHolder : MonoBehaviour
     {
         float newPrice = machine.GetPriceForProfitsLevelUp();
 
-        if (newPrice > GameManager.Instance.Money) return;
+        if (newPrice > GameManager.Instance.Money)
+        {
+            SoundManager.Instance.PlaySound(SoundManager.SoundType.Error);
+            return;
+        }
+        SoundManager.Instance.PlaySound(SoundManager.SoundType.PressButton);
 
         GameManager.Instance.Money -= newPrice;
         priceFillLevel.fillAmount += 0.1f;
@@ -75,19 +80,26 @@ public class MachinePopUpHolder : MonoBehaviour
             await Task.Delay(1000);
             priceFillLevel.fillAmount = 0;
             priceLevelUpButton.interactable = true;
-            priceLabel.text = "Current profit: " + newProfit + "/per";
+
+            SoundManager.Instance.PlaySound(SoundManager.SoundType.LevelUp);
         }
 
         machine.UpdProfits(newProfit);
         machine.UpdPriceForProfitsLevelUp(newPrice);
 
+        priceLabel.text = "Current profit: " + newProfit + "/per";
         priceLabel.text = $"{priceLevelUpProfitTemplate} {newPrice}$";
     }
     private async void QueueCapacityLevelUp()
     {
         float newPrice = machine.GetPriceForQueueLevelUp();
 
-        if (newPrice > GameManager.Instance.Money) return;
+        if (newPrice > GameManager.Instance.Money)
+        {
+            SoundManager.Instance.PlaySound(SoundManager.SoundType.Error);
+            return;
+        }
+        SoundManager.Instance.PlaySound(SoundManager.SoundType.PressButton);
 
         GameManager.Instance.Money -= newPrice;
         newPrice = GameManager.Instance.LinearGrowth(newPrice);
@@ -104,6 +116,8 @@ public class MachinePopUpHolder : MonoBehaviour
             queueFillLevel.fillAmount = 0;
             if (!machine.IsQueueFullLevelUp) queueCapacityLevelUpButton.interactable = true;
             else GameManager.Instance.Level++;
+
+            SoundManager.Instance.PlaySound(SoundManager.SoundType.LevelUp);
         }
 
         machine.UpdPriceForQueueLevelUp(newPrice);

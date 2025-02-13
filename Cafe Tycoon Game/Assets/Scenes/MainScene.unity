@@ -1145,6 +1145,7 @@ GameObject:
   - component: {fileID: 188830697}
   - component: {fileID: 188830696}
   - component: {fileID: 188830695}
+  - component: {fileID: 188830699}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1236,6 +1237,102 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!82 &188830699
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 188830694}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!224 &192150371 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1706171576282200223, guid: 923029400932fbd4abcf7e13dd8fb212,
@@ -3751,6 +3848,7 @@ GameObject:
   m_Component:
   - component: {fileID: 688075842}
   - component: {fileID: 688075843}
+  - component: {fileID: 688075844}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -3869,6 +3967,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &688075844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688075841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ea1d56f24a4a0b49ad9a4c4836975f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _persistent: 1
+  UIAudioSource: {fileID: 188830699}
+  pressButtonAudioClip: {fileID: 8300000, guid: ab17b511be95f3c4399d02f711e564ea,
+    type: 3}
+  errorAudioClip: {fileID: 8300000, guid: fa10dbc3bd17438429c98fec013b62e9, type: 3}
+  recieveMoneyAudioClip: {fileID: 8300000, guid: d9753630d1a36b743ba0b6550e50aff1,
+    type: 3}
+  levelUpAudioClip: {fileID: 8300000, guid: 2d72bf8d92b81004dacf52212fc2fd10, type: 3}
 --- !u!1001 &703465286
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5536,10 +5654,14 @@ MonoBehaviour:
   - {fileID: 785640668}
   - {fileID: 1852591406}
   - {fileID: 2124227631}
-  robotBuyerPrefab: {fileID: 5357377830290308229, guid: 74a85142f3f99ea4c8e31deca387c09c,
-    type: 3}
+  robotBuyerPrefab:
+  - {fileID: 5357377830290308229, guid: 74a85142f3f99ea4c8e31deca387c09c, type: 3}
+  - {fileID: 5357377830290308229, guid: 47504fec1ca4e74438d46e474ba3dafe, type: 3}
+  - {fileID: 5357377830290308229, guid: 439991a83dcb77643aa006eb494bab5b, type: 3}
+  - {fileID: 5357377830290308229, guid: e9e8bdca5862dbd4686bf03c10bec10a, type: 3}
+  - {fileID: 5357377830290308229, guid: f7d6118bd5c150b47b54d6d1fa99791a, type: 3}
   robotSpawnPoint: {fileID: 416705917}
-  spawnTimer: 5
+  spawnTimer: 2
 --- !u!1001 &1091093071
 PrefabInstance:
   m_ObjectHideFlags: 0
