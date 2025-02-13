@@ -77,7 +77,16 @@ public class GameManager : Singleton<GameManager>
 
     public void LoadRobotStatue()
     {
-        if (RobotPieceCount >= coastOfBuild) buildRobotSystem.BuildRobot();
+        if (RobotPieceCount >= coastOfBuild)
+        {
+            buildRobotSystem.BuildRobot();
+            ReduceCostForBuild();
+        }
+    }
+
+    public void ReduceCostForBuild()
+    {
+        RobotPieceCount -= coastOfBuild;
     }
 
     private void AddRobotPiece()

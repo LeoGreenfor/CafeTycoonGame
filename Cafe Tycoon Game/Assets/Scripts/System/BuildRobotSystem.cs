@@ -42,6 +42,7 @@ public class BuildRobotSystem : MonoBehaviour
         {
             Instantiate(buildRobotPrefab, buildSpawnPoint.position, Quaternion.identity, null);
             GameManager.Instance.IsHaveRobotStatue = true;
+            GameManager.Instance.ReduceCostForBuild();
         }
     }
 }
